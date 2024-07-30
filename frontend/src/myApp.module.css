@@ -1,0 +1,10 @@
+.productBox{
+    border: 1px black solid;
+    padding: 10px;
+}
+
+.productsParent{
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+}
