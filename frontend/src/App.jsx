@@ -7,6 +7,11 @@ const App = () => {
   const [listProducts, setListProducts] = useState([]);
   const [productName, setProductName] = useState("");
   const [productSku, setProductSku] = useState("");
+  const [productDate, setProductDate] = useState("");
+  const [productType, setProductType] = useState("");
+  const [productQuimico, setProductQuimico] = useState("");
+
+  const [productAccept, setProductAccept] = useState(false);
 
   useEffect(()=>{
     getProducts();
@@ -27,7 +32,13 @@ const App = () => {
   }
 
   const createProduct = async () => {
-
+    console.log(productName);
+    console.log(productSku);
+    console.log(productDate);
+    console.log(productType);
+    console.log(productQuimico);
+    console.log(productAccept);
+    
     let productSchema = object({
       name: string().required(),
       sku: number().required().positive().integer()
@@ -58,14 +69,38 @@ const App = () => {
 
   return (
     <div>
-      <div>
+      <div className={styles.productForm}>
         <label>Nombre: </label>
         <input type="text" onChange={(e) => setProductName(e.target.value)} value={productName}/>
+
         <label>SKU: </label>
         <input type="number" onChange={(e) => setProductSku(e.target.value)} value={productSku}/>
 
+        <label>Fecha</label>
+        <input type="date" onChange={(e) => setProductDate(e.target.value)} value={productDate}/>
+
+        <label>Tipo</label>
+        <select onChange={(e) => setProductType(e.target.value)}>
+          <option value="1">Lacteo</option>
+          <option value="2">Vegano</option>
+        </select>
+
+        <div>
+          <label>Tiene quimicos?</label>
+          <label>Si</label>
+          <input type="radio" name="quimico" value="1" onChange={(e) => setProductQuimico(e.target.value)}/>
+          <label>No</label>
+          <input type="radio" name="quimico" value="0" onChange={(e) => setProductQuimico(e.target.value)}/>
+        </div>
+
+        <div>
+          <label>Acepta terminos?</label>
+          <input type="checkbox" checked={productAccept} onChange={(e) => setProductAccept(!productAccept)}/>
+        </div>
+
         <button onClick={createProduct}>Crear producto</button>
       </div>
+      <br />
       <br />
       <div className={styles.productsParent}>
 
