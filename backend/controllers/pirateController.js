@@ -21,4 +21,10 @@ const deletePirate = async (req, res) => {
     res.status(200).json();
 }
 
+const updatePirate = async (req, res) => {
+    var id = req.params.pirateId;
+    await Pirate.findByIdAndDelete(id);
+    res.status(200).json();
+}
+
 export {createPirate, getAllPirates, deletePirate};
