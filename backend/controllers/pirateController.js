@@ -21,4 +21,21 @@ const deletePirate = async (req, res) => {
     res.status(200).json();
 }
 
-export {createPirate, getAllPirates, deletePirate};
+const getPirateById = async (req, res) => {
+    var id = req.params.id;
+    var pirateFound = await Pirate.findById(id);
+    res.status(200).json(pirateFound);
+}
+
+const updatePirate = async (req, res) => {
+    try {
+        var id = req.params.pirateId;
+        var data = req.body;
+        await Pirate.findByIdAndUpdate(id, data, {runValidators: true});
+        res.status(200).json();
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}
+
+export {createPirate, getAllPirates, deletePirate, getPirateById, updatePirate};
